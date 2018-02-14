@@ -36,6 +36,11 @@
           }
         ]
       });
+	  $( document ).ready(function() {
+			//$("#skysphere").attr('src','https://c1.staticflickr.com/5/4749/39335524765_54e12d5531_k.jpg');
+			$("#skysphere").attr('src','https://c1.staticflickr.com/5/4664/26352086878_c117d51b7b_k.jpg');
+			
+		});
     </script>
   </head>
   <body>
@@ -90,7 +95,7 @@
      </a-entity>
 	 <a-entity id="particles" particle-system="preset: snow"></a-entity>
 
-     <a-sky src="img/puydesancy.jpg" rotation="0 -130 0"></a-sky>
+     <a-sky id="skysphere" src="img/puydesancy.jpg" rotation="0 -130 0"></a-sky>
     </a-scene>
   </body>
 </html>

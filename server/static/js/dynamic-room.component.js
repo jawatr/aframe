@@ -13,10 +13,10 @@ AFRAME.registerComponent('dynamic-room', {
     var isMultiuser = params.hasOwnProperty('room');
     var webrtc = params.hasOwnProperty('webrtc');
     var adapter = webrtc ? 'easyrtc' : 'wseasyrtc';
-    var voice = params.hasOwnProperty('voice');
+    var voice = params.hasOwnProperty('audio');
 	
 	// CBA - Added voice parameter
-	if(voice == "on"){
+	if(voice == true){
 		voice = true;
 		adapter = 'easyrtc';
 	}
