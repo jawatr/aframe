@@ -14,6 +14,21 @@ AFRAME.registerComponent('dynamic-room', {
     var webrtc = params.hasOwnProperty('webrtc');
     var adapter = webrtc ? 'easyrtc' : 'wseasyrtc';
     var voice = params.hasOwnProperty('voice');
+	
+	// CBA - Added voice parameter
+	if(voice == "on"){
+		voice = true;
+		adapter = 'easyrtc';
+	}
+	
+	 // Set local user's name
+	
+    var player = document.getElementById('player');
+    var myNametag = player.querySelector('.nametag');
+  //  var myNametag = document.getElementById('playerName');    // CBA - Commented to make it work with mozzilla, also added element in the dom.
+   
+    myNametag.setAttribute('text', 'value', params.username);
+	
     
     var networkedComp = {
       room: params.room,

@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <link href="/styles/login.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="form">
+		<div class="applogo">&nbsp;</div>
+        <h2>Enter room details</h2>
+        <form class="login-form" action="/DynamicRoom.html" method="GET">
+          <input type="text" name="room" placeholder="room" required/>
+          <input type="text" name="username" placeholder="username" required/>
+		   <div class="login-options">
+			<input type="checkbox" id="audio" name="audio" />
+			<label for="audio"><span></span>Create audio</label>
+		  </div>
+          <button>Join room</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
