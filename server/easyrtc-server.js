@@ -5,6 +5,10 @@ var serveStatic = require('serve-static');  // serve static files
 var socketIo = require("socket.io");        // web socket external module
 var easyrtc = require("easyrtc");               // EasyRTC external module
 
+// Add request module to call XirSys servers
+var request = require("request");
+
+
 // Set process name
 process.title = "node-easyrtc";
 
@@ -22,6 +26,7 @@ var webServer = http.createServer(app);
 var socketServer = socketIo.listen(webServer, {"log level":1});
 
 var myIceServers = [
+ /*
   {"url":"stun:stun.l.google.com:19302"},
   {"url":"stun:stun1.l.google.com:19302"},
   {"url":"stun:stun2.l.google.com:19302"},
@@ -56,7 +61,7 @@ var myIceServers = [
      "url":"turns:e3.xirsys.com:5349?transport=tcp",
      "username":"0f3abad0-129d-11e8-ab19-7ea9449ec310",
      "credential":"0f3abb8e-129d-11e8-8209-8f7a81465677"
-  }
+  }*/
   // {
   //   "url":"turn:[ADDRESS]:[PORT]",
   //   "username":"[USERNAME]",
@@ -68,9 +73,28 @@ var myIceServers = [
   //   "credential":"[CREDENTIAL]"
   // }
 ];
-easyrtc.setOption("appIceServers", myIceServers);
+//easyrtc.setOption("appIceServers", myIceServers);
 easyrtc.setOption("logLevel", "debug");
-easyrtc.setOption("demosEnable", false);
+//easyrtc.setOption("demosEnable", false);
+
+easyrtc.on("getIceConfig", function(connectionObj, callback) {
+    var httpreq = https.request(options, function(httpres) {
+        var str = "";
+        httpres.on("data", function(data){ str += data; });
+        httpres.on("error", function(e){ console.log("error: ",e); });
+        httpres.on("end", function(){ 
+            var d = JSON.parse(str);
+            if(d.s == 'ok'){
+                var iceConfig = d.v.iceServers;
+                console.log('server list: ',iceConfig);
+                callback(null, iceConfig);
+            }
+        });
+    });
+    httpreq.end();
+});
+
+
 
 // Overriding the default easyrtcAuth listener, only so we can directly access its callback
 easyrtc.events.on("easyrtcAuth", function(socket, easyrtcid, msg, socketCallback, callback) {
@@ -109,3 +133,13 @@ var rtc = easyrtc.listen(app, socketServer, null, function(err, rtcRef) {
 webServer.listen(port, function () {
   console.log('listening on http://localhost:' + port);
 });
+
+var https = require("https");
+var options = {
+      host: "global.xirsys.net",
+      path: "/_turn/MyFirstApp",
+      method: "PUT",
+      headers: {
+          "Authorization": "Basic " + new Buffer("jawatr:864c3d40-129a-11e8-8b8f-486c07ca5853").toString("base64")
+      }
+};
