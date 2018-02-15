@@ -45,6 +45,8 @@
   <body>
     <a-scene dynamic-room>
       <a-assets>
+		<a-asset-item id="tree-obj"  crossorigin="anonymous" src="https://ucarecdn.com/0d14b0e0-a5ac-403c-a472-f87992900d7c/"></a-asset-item>
+		<a-asset-item id="tree-mtl" crossorigin="anonymous" src="https://ucarecdn.com/e1ffe7b5-0af3-4f2c-9512-f7f627f297e5/"></a-asset-item>
 		<img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
         <!-- Player -->
         <script id="player-template" type="text/html">
@@ -52,6 +54,7 @@
         </script>
 		
 		 <script id="head-template" type="text/html">
+
 		  <a-entity class="nametag" text="value: Hello World; align:center;" position="0 0.7 0" rotation="0 180 0" scale="8 8 8"></a-entity>
           <a-entity class="avatar">
 			<a-sphere class="head"
@@ -102,7 +105,7 @@
         <a-entity hand-controls="right" networked="template:#hand-template;showLocalTemplate:false;"></a-entity>
 		
       </a-entity>
-	  
+	 <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" scale="0.05 0.05 0.05" rotation="0 90 0" position="5 2 0"></a-entity>
      <a-sky id="skysphere" src="img/puydesancy.jpg" rotation="0 -130 0"></a-sky>
 
     </a-scene>
