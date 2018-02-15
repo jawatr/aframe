@@ -5,6 +5,9 @@ var serveStatic = require('serve-static');  // serve static files
 var socketIo = require("socket.io");        // web socket external module
 var easyrtc = require("easyrtc");               // EasyRTC external module
 
+//CBA - Add request module to call XirSys servers
+var request = require("request");
+
 // Set process name
 process.title = "node-easyrtc";
 
@@ -22,10 +25,45 @@ var webServer = http.createServer(app);
 var socketServer = socketIo.listen(webServer, {"log level":1});
 
 var myIceServers = [
-  {"url":"stun:stun.l.google.com:19302"},
+  /*{"url":"stun:stun.l.google.com:19302"},
   {"url":"stun:stun1.l.google.com:19302"},
   {"url":"stun:stun2.l.google.com:19302"},
-  {"url":"stun:stun3.l.google.com:19302"}
+  {"url":"stun:stun3.l.google.com:19302"}*/
+  {"url":"stun:e3.xirsys.com"},
+  {
+     "url":"turn:e3.xirsys.com:80?transport=udp",
+     "username":"0f3abad0-129d-11e8-ab19-7ea9449ec310",
+     "credential":"0f3abb8e-129d-11e8-8209-8f7a81465677"
+  },
+  {
+     "url":"turn:e3.xirsys.com:3478?transport=udp",
+     "username":"0f3abad0-129d-11e8-ab19-7ea9449ec310",
+     "credential":"0f3abb8e-129d-11e8-8209-8f7a81465677"
+  },
+  {
+     "url":"turn:e3.xirsys.com:3478?transport=udp",
+     "username":"0f3abad0-129d-11e8-ab19-7ea9449ec310",
+     "credential":"0f3abb8e-129d-11e8-8209-8f7a81465677"
+  },  
+  {
+     "url":"turn:e3.xirsys.com:3478?transport=tcp",
+     "username":"0f3abad0-129d-11e8-ab19-7ea9449ec310",
+     "credential":"0f3abb8e-129d-11e8-8209-8f7a81465677"
+  },  
+  {
+     "url":"turns:e3.xirsys.com:443?transport=tcp",
+     "username":"0f3abad0-129d-11e8-ab19-7ea9449ec310",
+     "credential":"0f3abb8e-129d-11e8-8209-8f7a81465677"
+  },  
+  {
+     "url":"turns:e3.xirsys.com:5349?transport=tcp",
+     "username":"0f3abad0-129d-11e8-ab19-7ea9449ec310",
+     "credential":"0f3abb8e-129d-11e8-8209-8f7a81465677"
+  }
+  
+  
+  
+  
   // {
   //   "url":"turn:[ADDRESS]:[PORT]",
   //   "username":"[USERNAME]",
@@ -36,6 +74,7 @@ var myIceServers = [
   //   "username":"[USERNAME]",
   //   "credential":"[CREDENTIAL]"
   // }
+  
 ];
 easyrtc.setOption("appIceServers", myIceServers);
 easyrtc.setOption("logLevel", "debug");
