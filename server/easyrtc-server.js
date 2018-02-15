@@ -22,10 +22,10 @@ var webServer = http.createServer(app);
 var socketServer = socketIo.listen(webServer, {"log level":1});
 
 var myIceServers = [
-/*  {"url":"stun:stun.l.google.com:19302"},
+  {"url":"stun:stun.l.google.com:19302"},
   {"url":"stun:stun1.l.google.com:19302"},
   {"url":"stun:stun2.l.google.com:19302"},
-  {"url":"stun:stun3.l.google.com:19302"},*/
+  {"url":"stun:stun3.l.google.com:19302"},
   {"url":"stun:e3.xirsys.com"},
   {
      "url":"turn:e3.xirsys.com:80?transport=udp",
