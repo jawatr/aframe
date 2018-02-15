@@ -25,9 +25,16 @@ AFRAME.registerComponent('dynamic-room', {
 	
     var player = document.getElementById('player');
     var myNametag = player.querySelector('.nametag');
-  //  var myNametag = document.getElementById('playerName');    // CBA - Commented to make it work with mozzilla, also added element in the dom.
+   // var myNametag = document.getElementById('tag-templatename');    // CBA - Commented to make it work with mozzilla, also added element in the dom.
    
-    myNametag.setAttribute('text', 'value', params.username);
+	if(myNametag != null){
+		if(params.username == null){
+			myNametag.setAttribute('text', 'value', 'Anonymous');
+		}else{
+			myNametag.setAttribute('text', 'value', params.username);
+		}
+		
+	}
 	
     
     var networkedComp = {
